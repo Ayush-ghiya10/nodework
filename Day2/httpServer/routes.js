@@ -1,3 +1,5 @@
+
+
 const fs = require("fs");
 
 const routeHandler = (req, res) => {
@@ -12,9 +14,8 @@ const routeHandler = (req, res) => {
     req.on("data", (chunk) => {
       body.push(chunk);
     });
-    let parsedBody = "";
     req.on("end", () => {
-      parsedBody = Buffer.concat(body)
+      const parsedBody = Buffer.concat(body)
         .toString()
         .split("=")[1]
         .replaceAll("+", " ");
