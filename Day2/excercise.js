@@ -5,9 +5,7 @@ const hideCenterDigits = (number) => {
   //(\d{2}) => capture first 2 digits
   //(\d+) => captures unlimited digits which are in decimal form
   // /g ==> global pattern
-  const hiddenNumber = number.replace(
-    /(\d{2})(\d+)(\d{2})/g,
-    (match, start, middle, end) => {
+  const hiddenNumber = number.replace(/(\d{2})(\d+)(\d{2})/g,(match, start, middle, end) => {
       return start + "*".repeat(middle.length) + end;
     }
   );
