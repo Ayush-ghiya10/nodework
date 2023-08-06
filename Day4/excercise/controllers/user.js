@@ -2,12 +2,12 @@ const User = require("../models/user");
 const Project = require("../models/project");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-
 exports.loginUser = async (req, res) => {
   const {
     body: { email, password },
   } = req;
   try {
+    
     const existUser = await User.findOne({ email: email.toLowerCase() });
     if (!existUser) throw Error("User is not registered");
     const passwordResult = bcrypt.compare(password, existUser.password);

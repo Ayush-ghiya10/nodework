@@ -2,7 +2,7 @@ const Project = require("../models/project");
 
 exports.createProject = async (req, res) => {
   const {
-    body: { projectName, projectType, numberOfTalentsRequired },
+    body: { projectName, projectType, numberOfTalentsRequired,description },
     payload: { email, userType },
   } = req;
 
@@ -25,6 +25,7 @@ exports.createProject = async (req, res) => {
       projectName,
       projectType,
       numberOfTalentsRequired,
+      description,
       creatorEmail: email,
     });
     const result = await newProject.save();
