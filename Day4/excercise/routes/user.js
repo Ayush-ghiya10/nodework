@@ -18,5 +18,7 @@ router.post(
   body("userType").contains()]),
   userController.registerUser
 );
+router.post('/updateNumber',userController.updateNumber);
+router.post('/verifyNumber',userController.verifyNumber);
 router.get("/getlist", auth, userController.listProjects);
 module.exports = router;

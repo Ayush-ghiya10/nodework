@@ -2,14 +2,21 @@ const Project = require("../models/project");
 
 exports.createProject = async (req, res) => {
   const {
-    body: { projectName, projectType, numberOfTalentsRequired,description },
-    payload: { email, userType },
+    body: { projectName, projectType, numberOfTalentsRequired,description,creatorEmail },
+    // payload: { email, userType },
+    file
   } = req;
+  
 
   try {
-    if (userType !== "cd") {
-      const err = new Error("Not Authenticated");
-      err.statusCode = 401;
+    // if (userType !== "cd") {
+    //   const err = new Error("Not Authenticated");
+    //   err.statusCode = 401;
+    //   throw err;
+    // }
+    if (!file) {
+      const err = new Error("Image is not selected");
+      err.statusCode = 422;
       throw err;
     }
     const existProject = await Project.findOne({
@@ -21,12 +28,19 @@ exports.createProject = async (req, res) => {
       err.statusCode = 403;
       throw err;
     }
+    // const newProject = new Project({
+    //   projectName,
+    //   projectType,
+    //   numberOfTalentsRequired,
+    //   description,
+    //   creatorEmail: email,
+    // });
     const newProject = new Project({
       projectName,
       projectType,
-      numberOfTalentsRequired,
+      coverImage:file.path,
       description,
-      creatorEmail: email,
+      creatorEmail,
     });
     const result = await newProject.save();
     if (!result) throw Error("Cannot create Project");

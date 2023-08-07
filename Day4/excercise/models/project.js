@@ -24,6 +24,9 @@ const projectSchema = mongoose.Schema({
     },
     numberOfTalentsRequired:{
         type:Number
+    },
+    coverImage:{
+        type:String
     }
 });
 projectSchema.pre('save',function (next){

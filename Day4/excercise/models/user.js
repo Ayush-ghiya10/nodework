@@ -28,8 +28,16 @@ const userSchema = mongoose.Schema({
     age:{
         type:Number,
         default:0
-    } 
-});
+    },
+    countryCode:{
+        type:String,
+    },
+    phoneNumber:{
+        type :String,
+    },
+    verified: Boolean,
+    OTP: Number
+},{timestamps:true});
 userSchema.pre('save',function (next){
     this.id = uuidv4();
     this.email = this.email.toLowerCase();
