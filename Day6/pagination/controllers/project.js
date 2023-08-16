@@ -1,22 +1,23 @@
 const Project = require("../models/project");
-const User = require("../models/user");
-const superHeroes = require("superheroes");
+const superHeroes = require("superheroes");// do proper ordering on imports
+
+
 exports.getProjects = async (req, res) => {
   const {
     body: { offset, limit },
   } = req;
   const skills = req.body.skills.split(",");
 
-  const projects = await Project.find(
+  const projects = await Project.find( // put the code in try and catch block
     { requiredSkills: { $in: skills } },
     { title: 1, createdBy: 1, requiredSkills: 1 }
   )
     .populate({ path: "createdBy", select: "displayName" })
-    .limit(10 || limit)
-    .skip(offset)
-    .sort({ createdBy: 1, title: 1 });
+    .limit(10 || limit) // this is wrong logic
+    .skip(offset) // re order functions appropriately
+    .sort({ createdBy: 1, title: 1 }); // incorrect logic
     const countObject = await Project.countDocuments({requiredSkills: { $in: skills }})
-  res.send({Total:countObject,projects:projects});
+  res.status(200).send({Total:countObject,projects:projects});
 };
 
 function getRandomSkills(arr, minSize, maxSize) {
@@ -39,7 +40,7 @@ const getRandomNumber = (min, max) => {
 //         }
 //     }
 //     return randomSkills;
-// }
+// } // remove commented lines
 const getRandomUsers = () => {
   let userArr = [
     "64d23c9f141a8fd978d128b0",
@@ -71,7 +72,7 @@ exports.createProjects = async (req, res) => {
       requiredSkills: getRandomSkills(skillsArr, 2, 5),
     });
   }
-  console.log(projects);
-  const result = await Project.insertMany(projects);
-  res.send({ message: "Created " });
+  console.log(projects);// remove console log
+  const result = await Project.insertMany(projects);// put in try and catch block
+  res.send({ message: "Created " ,result});
 };

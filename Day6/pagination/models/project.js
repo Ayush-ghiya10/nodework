@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const projectSchema = mongoose.Schema(
+const projectSchema = Schema(
   {
     title: {
       type: String,
@@ -14,11 +14,13 @@ const projectSchema = mongoose.Schema(
       ref: "User",
       required: true,
     },
-    requiredSkills: { type: [String] },
-    published:{
-      type:Boolean,
-      default:false
-    }
+    requiredSkills: {
+      type: [String],
+    },
+    published: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true }
 );
