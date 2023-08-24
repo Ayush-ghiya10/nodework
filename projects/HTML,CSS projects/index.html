@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./main.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- form with table -->
+    <div class="form-container">
+      <form  id="myForm">
+        <label>Name:</label>
+        <input
+          type="text"
+          name="name"
+          id="name"
+          class="textbox"
+          placeholder="Enter Your Name"
+          required
+        /><br />
+        <label>Email:</label>
+        <input
+          type="email"
+          name="email"
+          id="email"
+          class="textbox"
+          placeholder="Enter Your Email"
+          required
+        /><br />
+        <label>Password:</label>
+        <input
+          type="password"
+          name="password"
+          id="password"
+          name="password"
+          class="textbox"
+          placeholder="Enter your password"
+          required
+        /><br />
+        <label>Gender:</label>
+        <input type="radio" name="gender" value="male" required />Male
+        <input type="radio" name="gender" value="female" />Female<br />
+        <label>Skills:</label>
+        <input type="checkbox" name="skills" value="dancing" />Dancing
+        <input type="checkbox" name="skills" value="singing" />Singing
+        <input type="checkbox" name="skills" value="sleeping" />Sleeping
+        <input type="checkbox" name="skills" value="eating" />Eating
+        <input type="checkbox" name="skills" value="jogging" />Jogging
+        <input type="checkbox" name="skills" value="reading" />Reading<br />
+        <label>City:</label>
+        <select name="city" required>
+          <option value="" disabled selected>Choose a city</option>
+          <option name="city" value="vadodara">Surat</option>
+          <option name="city" value="surat">Jamnagar</option>
+          <option name="city" value="ahmedabad">Ahmedabad</option>
+          <option name="city" value="rajkot">Rajkot</option></select
+        ><br />
+        <input type="submit" name="submit" value="submit"/>
+        <input type="reset" name="reset" />
+      </form>
+      <div id="response"></div>
+    </div>
+    <script>
+        const form = document.getElementById('myForm');
+        const test = document.getElementsByName("skills");
+        const responseDiv = document.getElementById('response');
+        form.addEventListener('reset',function(e){
+            responseDiv.innerHTML = '';
+        })
+        form.addEventListener('submit', function (e) {
+            e.preventDefault(); // Prevent the form from submitting normally
+
+            // Get form data
+            const formData = new FormData(form);
+            // Create a simple object from the form data
+            const data = {};
+            formData.forEach((value, key) => {
+                if (data[key]) {
+                    if (!Array.isArray(data[key])) {
+                        data[key] = [data[key]];
+                    }
+                    data[key].push(value);
+                } else {
+                    data[key] = value;
+                }
+            });
+            console.log(formData);
+            console.log(data);
+
+            // Send a POST request (you can use fetch or XMLHttpRequest for more advanced requests)
+            // In this example, we just display the form data as a response on the same page
+            responseDiv.innerHTML = `
+                <h2>Form Data:</h2>
+                <p>Name: ${data.name}</p>
+                <p>Email: ${data.email}</p>
+                <p>Password: ${data.password}</p>
+                <p>Gender: ${data.gender}</p>
+                <p>Skills: ${data.skills}</p>
+                <p>City: ${data.city}</p>
+            `;
+        });
+    </script>
+
+
+
+  </body>
+</html>

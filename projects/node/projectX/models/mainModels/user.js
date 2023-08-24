@@ -4,59 +4,59 @@ const bcrypt = require('bcrypt');
 const Schema = mongoose.Schema;
 
 const userSchema = Schema({
-    userId :{
+    userId : {
         type: String,
     },
-    firstName:{
+    firstName: {
         type : String,
         required:true
     },
-    lastName:{
+    lastName: {
         type : String,
     },
-    email:{
+    email: {
         type:String,
         required:true
     },
-    OTP:{
+    OTP: {
         type:Number
     },
-    workLocation:{
+    workLocation: {
         type:String
     },
-    mobileNo:{
+    mobileNo: {
         type:String,
         required:true
     },
-    passwordHash:{
+    passwordHash: {
         type:String,
     },
-    userType:{
+    userType: {
         type:String,
         required:true,
         default:'talent',
         enum:['talent','cd','admin']
     },
-    forcePasswordReset:{
+    forcePasswordReset: {
         type:Boolean,
         required:true,
         default:false
     },
-    profilePicUrl:{
+    profilePicUrl: {
         type:String,
     },
-    verified:{
+    verified: {
         type:Boolean,
         required:true,
         default:false
     },
-    status:{
+    status: {
         type:String,
         required:true,
         default:'active',
         enum:['active','inactive','blocked']
     },
-    lastLogin:{
+    lastLogin: {
         type:Date,
         default:Date.now()
     }

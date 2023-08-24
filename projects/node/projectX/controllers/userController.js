@@ -1,9 +1,10 @@
 const User = require("../models/mainModels/user");
 const Notification = require("../models/mappingModels/notification");
+const { v4: uuidv4 } = require("uuid");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const otpGenerator = require("otp-generator");
-const { v4: uuidv4 } = require("uuid");
+
 const { SendWelcomeEmail } = require("../utills/emailer");
 const nodemailer = require("nodemailer");
 const ethnicityOperations = require("../utills/ethnicityOperations");
